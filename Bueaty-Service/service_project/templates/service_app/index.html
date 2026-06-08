@@ -1,0 +1,46 @@
+{% extends 'service_app/base.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glam Express - Parlours</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Glam Express</h1>
+      <form method="POST" action="{% url 'index' %}" class="search-form">
+        {% csrf_token %}
+        <input
+          type="text"
+          name="location"
+          placeholder="Enter location..."
+          value="{{ query|default:'' }}"
+        />
+        <button type="submit">Search</button>
+      </form>
+
+      <h2>Available Parlours</h2>
+      <ul class="parlour-list">
+        {% for parlour in parlours %}
+        <li>
+          <a href="{% url 'parlour_detail' parlour.id %}">
+            <img
+              src="{{ parlour.image.url }}"
+              alt="{{ parlour.parlour_name }}"
+              loading="lazy"
+            />
+            <h3>{{ parlour.parlour_name }}</h3>
+            <p>{{ parlour.location }}</p>
+            <p>Rating: {{ parlour.rating }}</p>
+          </a>
+        </li>
+        {% empty %}
+        <li>No parlours found in that location.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>
+{% endblock %}

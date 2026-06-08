@@ -1,0 +1,135 @@
+/* people.css */
+
+/* Body and container */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff0f6;
+  /* soft pink background */
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(233, 30, 99, 0.15);
+  /* pink shadow */
+}
+
+/* Headings */
+h1,
+h2 {
+  color: #E91E63;
+  /* Glam Express pink */
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Search form */
+.search-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 40px;
+  justify-content: center;
+}
+
+.search-form input[type="text"] {
+  flex-grow: 1;
+  max-width: 400px;
+  padding: 10px 15px;
+  border: 2px solid #E91E63;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.search-form input[type="text"]:focus {
+  border-color: #AD1457;
+  /* darker pink */
+  outline: none;
+}
+
+.search-form button {
+  background-color: #E91E63;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-form button:hover {
+  background-color: #AD1457;
+}
+
+/* Parlour list */
+.parlour-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+
+.parlour-list li {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 260px;
+  transition: transform 0.2s ease;
+}
+
+.parlour-list li:hover {
+  transform: translateY(-5px);
+}
+
+.parlour-list li a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  padding: 15px;
+}
+
+.parlour-list li img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  object-fit: cover;
+  height: 160px;
+}
+
+.parlour-list li h3 {
+  margin: 0 0 8px 0;
+  font-weight: 700;
+  color: #E91E63;
+}
+
+.parlour-list li p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .search-form {
+    flex-direction: column;
+  }
+
+  .parlour-list {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .parlour-list li {
+    width: 100%;
+  }
+}

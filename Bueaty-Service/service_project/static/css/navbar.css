@@ -1,0 +1,60 @@
+/* navbar.css */
+
+.header {
+    background-color: #E91E63;
+    /* Glam Express pink */
+    padding: 15px 0;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    font-size: 1.8rem;
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 2px;
+    user-select: none;
+    transition: color 0.3s ease;
+}
+
+.logo a:hover {
+    color: #ffc1e3;
+    /* lighter pink on hover */
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    user-select: none;
+}
+
+.nav-links a:hover {
+    color: #ffc1e3;
+    /* lighter pink on hover */
+}
+
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-links a {
+        margin-left: 0;
+        margin-right: 15px;
+        font-size: 1.1rem;
+    }
+}

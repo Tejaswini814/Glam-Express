@@ -1,0 +1,66 @@
+{% extends 'service_app/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/bookings.css' %}" />
+
+<div class="container">
+  <h2>My Bookings</h2>
+
+  {% if bookings %}
+  <table border="1" cellpadding="10">
+    <thead>
+      <tr>
+        <th>Parlour</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Service Location</th>
+        <th>Services</th> <!-- Added column -->
+        <th>Status</th>
+        <th>Review</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for booking in bookings %}
+      <tr>
+        <td>{{ booking.parlour.parlour_name }}</td>
+        <td>{{ booking.booking_date }}</td>
+        <td>{{ booking.booking_time }}</td>
+        <td>{{ booking.user_location }}</td>
+        <td>
+          {% if booking.services.all %}
+            {% for service in booking.services.all %}
+              {{ service.name }} (₹{{ service.price }}){% if not forloop.last %}, {% endif %}
+            {% empty %}
+              No services
+            {% endfor %}
+          {% else %}
+            No services
+          {% endif %}
+        </td>
+
+        <td>{{ booking.is_approved|yesno:"Approved,Pending" }}</td>
+        <td>
+          {% if booking.is_approved and booking.booking_date <= today %}
+            {% if not booking.review %}
+              <button onclick="triggerReview({{ booking.id }}, '{{ booking.parlour.parlour_name }}')">
+                Leave Review
+              </button>
+            {% else %}
+              ✅ Reviewed
+            {% endif %}
+          {% else %}
+            ⏳ Waiting
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>You have no bookings yet.</p>
+  {% endif %}
+</div>
+
+<input type="hidden" id="csrf_token" value="{{ csrf_token }}" />
+<script src="{% static 'js/bookings.js' %}"></script>
+{% endblock %}

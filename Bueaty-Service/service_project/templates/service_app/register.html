@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Glam Express</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}" />
+  </head>
+  <body>
+    <div class="register-container">
+      <h2>Join <span>Glam Express</span></h2>
+      <form data-url="{% url 'register' %}" method="POST" id="register-form">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="firstname">First Name:</label>
+          <input type="text" name="firstname" id="firstname" required />
+        </div>
+
+        <div class="form-group">
+          <label for="lastname">Last Name:</label>
+          <input type="text" name="lastname" id="lastname" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" name="email" id="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password1">Password:</label>
+          <input type="password" name="password1" id="password1" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password2">Confirm Password:</label>
+          <input type="password" name="password2" id="password2" required />
+        </div>
+
+        <button type="submit">Register</button>
+        <p>Already a member? <a href="{% url 'login' %}">Login</a></p>
+      </form>
+    </div>
+    <script text="text/javascript" src="{% static 'js/register.js' %}"></script>
+  </body>
+</html>

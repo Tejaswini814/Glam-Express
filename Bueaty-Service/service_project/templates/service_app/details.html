@@ -1,0 +1,56 @@
+{% extends 'service_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/detailspage.css' %}" />
+
+<div class="parlour-container">
+  <h2>{{ parlour.parlour_name }}</h2>
+  <img class="parlour-image" src="{{ parlour.image.url }}" alt="Image" />
+
+  <div class="parlour-details">
+    <p><strong>Description:</strong> {{ parlour.description }}</p>
+    <p><strong>Location:</strong> {{ parlour.location }}</p>
+    <p><strong>Rating:</strong> {{ parlour.rating }}</p>
+  </div>
+
+  <button class="book-now-btn" onclick="openBookingModal()">Book Now</button>
+
+  <div id="bookingModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h3>Book {{ parlour.parlour_name }}</h3>
+      <form id="bookingForm" method="post" data-url="{% url 'book_parlour' %}">
+        {% csrf_token %}
+        <input type="hidden" name="parlour_id" value="{{ parlour.id }}" />
+
+        <label>Location (Home service):</label>
+        <input type="text" name="location" required />
+
+        <label>Date:</label>
+        <input type="date" name="date" required />
+
+        <label>Time:</label>
+        <input type="time" name="time" required />
+
+        <label for="services">Select Services:</label>
+        <select name="services" id="services" multiple required>
+          {% for service in services %}
+            <option value="{{ service.id }}">{{ service.name }} - ${{ service.price }}</option>
+          {% empty %}
+            <option disabled>No services available</option>
+          {% endfor %}
+        </select>
+
+        <div id="formError" style="color: red; margin-top: 10px;"></div>
+
+        <div class="modal-buttons">
+          <button type="submit">Confirm</button>
+          <button type="button" class="cancel-btn" onclick="closeBookingModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/details.js' %}"></script>
+{% endblock %}

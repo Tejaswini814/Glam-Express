@@ -1,0 +1,27 @@
+{% extends 'service_app/base.html' %} {% load static %} {% block content %}
+<link rel="stylesheet" href="{% static 'css/review.css' %}" />
+
+<div class="container">
+  <h2>Review Your Experience at {{ booking.parlour.parlour_name }}</h2>
+
+  <form id="reviewForm" data-redirect-url="{% url 'my_bookings' %}">
+    {% csrf_token %}
+    <label>Rating (1 to 5):</label>
+    <select name="rating" required>
+      <option value="">Select</option>
+      {% for i in "12345" %}
+      <option value="{{ i }}">{{ i }}</option>
+      {% endfor %}
+    </select>
+    <br /><br />
+
+    <label>Your Feedback:</label><br />
+    <textarea name="review" required></textarea><br /><br />
+
+    <button type="submit">Submit Review</button>
+  </form>
+
+  <p id="responseMessage"></p>
+</div>
+<script text="text/javascript" src="{% static 'js/review.js' %}"></script>
+{% endblock %}
